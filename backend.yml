@@ -67,12 +67,13 @@
     - name: Load Schema
       mysql_db:
         name: all
-        target: /app/schema/backend.sql
-        state: import
-
         login_user: root
         login_password: ExpenseApp@1
         login_host: 172.31.25.56
+        target: /app/schema/backend.sql
+        state: import
+
+
 
     - name: Load the service
       ansible.builtin.systemd_service:
