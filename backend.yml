@@ -49,5 +49,29 @@
           path: npm install
           state: latest
 
+    - name: Install mysql
+      ansible.builtin.dnf:
+        name: mysql
+        state: latest
+
+    - name: Install PyMySQL package
+      ansible.builtin.pip:
+        name: PyMySQL
+        state: latest
+
+    - name: Install cryptography package
+      ansible.builtin.pip:
+        name: cryptography
+        state: latest
+
+    - name: Load Schema
+      mysql_db:
+        name: all
+        state: import
+        target: /app/schema/backend.sql
+        login_user: root
+        login_password: ExpenseApp@1
+        login_host: mysql-dev.pdevops72.online
+
 
 
