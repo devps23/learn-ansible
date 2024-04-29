@@ -17,11 +17,6 @@
       ansible.builtin.user:
         name: expense
 
-    - name: Copy backend service
-      ansible.builtin.copy:
-        src: backend.conf
-        dest: /etc/systemd/system/backend.service
-
     - name: clean the code
       ansible.builtin.file:
         path: /app
@@ -49,7 +44,10 @@
         path: npm install
         state: latest
 
-
+    - name: Copy backend service
+      ansible.builtin.copy:
+        src: backend.conf
+        dest: /etc/systemd/system/backend.service
 
     - name: Load the service
       ansible.builtin.systemd_service:
@@ -61,9 +59,9 @@
          state: latest
 
     - name: Install PyMySQL package
-      ansible.builtin.pip:
-        name: PyMySQL
-        state: latest
+        ansible.builtin.pip:
+          name: PyMySQL
+          state: latest
     - name: Install cryptography package
       ansible.builtin.pip:
         name: cryptography
@@ -80,13 +78,13 @@
 
 
     - name: Enabled backend service
-      ansible.builtin.service:
+      ansible.builtin.systemd_service:
         name: backend
         enabled: yes
 
 
     - name: Restart configuration service
-      ansible.builtin.service:
+      ansible.builtin.systemd_service:
         name: backend
         state: restarted
 
