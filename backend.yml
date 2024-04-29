@@ -18,3 +18,8 @@
         src: backend.conf
         dest: /etc/systemd/system/backend.service
 
+    - name: Add application user
+      ansible.builtin.user:
+         name: expense
+
+
