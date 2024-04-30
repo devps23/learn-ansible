@@ -46,7 +46,7 @@
     - name: Install npm dependencies
       community.general.npm:
           name: npm
-          path: npm install
+          path: /app
           state: latest
 
     - name: Install mysql
